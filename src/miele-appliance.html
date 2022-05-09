@@ -1,0 +1,88 @@
+<script type="text/html" data-template-name="miele-appliance">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i><span data-i18n="miele-appliance.name"></span></label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-list"></i><span data-i18n="miele-appliance.config"></span></label>
+        <input type="text" id="node-input-config">
+    </div>
+    <div class="form-row">
+        <label for="node-input-id"><i class="fa fa-id-card"></i><span data-i18n="miele-appliance.id"></span></label>
+        <input type="text" id="node-input-id">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="miele-appliance">
+    <p>A node that emits events from a Miele appliance.</p>
+
+    <h3>Details</h3>
+    <p>The output format is in the following format:<p>
+    <p class="property-type">payload: {
+        type: "string",
+        data: {
+            ...
+        }
+    }
+    </p>
+    <p>The data depends on the type of the event.</p>
+    <p>The "device" event contains the current state of the appliance.
+        The format is documented in the official <a href="https://www.miele.com/developer/swagger-ui/index.html#/Information/get_devices__deviceId_">Miele API documentation</a>
+        in the "/devices/{deviceId}" response.<p>
+</script>
+
+<script type="text/javascript">
+    function updateDeviceList(current) {
+        const config = $('#node-input-config option:selected').val();
+        if (config == null || config === "_ADD_") {
+            $("#node-input-id").typedInput({
+                types: [
+                    {
+                        value: current,
+                        options: []
+                    }
+                ]
+            });
+            return;
+        }
+
+        $.get('miele/devices', { config })
+            .done((data) => {
+                let devices = JSON.parse(data);
+                const options = {};
+                for (const device of devices) {
+                    options[device.fabNumber] = { value: device.fabNumber, label: `${device.type} (${device.fabNumber})` };
+                }
+                $("#node-input-id").typedInput({
+                    types: [
+                        {
+                            value: current,
+                            options: Object.values(options)
+                        }
+                    ]
+                });
+            })
+            .fail(() => {
+                RED.notify(this._("miele-appliance.unknown-error"), "error");
+            })
+    }
+
+    RED.nodes.registerType('miele-appliance', {
+        category: 'Miele',
+        defaults: {
+            name: { value: "" },
+            config: { type: "miele-config", required: true },
+            id: { required: true },
+        },
+        outputs: 1,
+        label() {
+            return this.name;
+        },
+        oneditprepare() {
+            const current = $("#node-input-id").val();
+            $('#node-input-config').change(() => {
+                updateDeviceList(current);
+            });
+        }
+    });
+</script>

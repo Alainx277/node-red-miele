@@ -1,0 +1,97 @@
+<script type="text/html" data-template-name="miele-config">
+    <div class="form-row">
+		<label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="miele-config.name"></span></label>
+		<input type="text" id="node-config-input-name" style="width: calc(100% - 105px)">
+	</div>
+    <div class="form-row">
+		<label for="node-config-input-clientId"><i class="fa fa-id-card"></i> <span data-i18n="miele-config.clientId"></span></label>
+		<input type="text" id="node-config-input-clientId" style="width: calc(100% - 105px)">
+    </div>
+    <div class="form-row">
+		<label for="node-config-input-clientSecret"><i class="fa fa-lock"></i> <span data-i18n="miele-config.clientSecret"></span></label>
+		<input type="text" id="node-config-input-clientSecret" style="width: calc(100% - 105px)">
+    </div>
+    <div class="form-row">
+		<label for="node-config-input-username"><i class="fa fa-id-card"></i> <span data-i18n="miele-config.username"></span></label>
+		<input type="text" id="node-config-input-username" style="width: calc(100% - 105px)">
+    </div>
+    <div class="form-row">
+		<label for="node-config-input-password"><i class="fa fa-lock"></i> <span data-i18n="miele-config.password"></span></label>
+		<input type="password" id="node-config-input-password" style="width: calc(100% - 105px)">
+    </div>
+    <div class="form-row">
+		<label for="node-config-input-country"><i class="fa fa-flag"></i> <span data-i18n="miele-config.country"></span></label>
+		<select id="node-config-input-country" style="width: calc(100% - 105px)">
+      <option value="en-AU">Australia</option>
+      <option value="nl-BE">België</option>
+      <option value="en-CA">Canada</option>
+      <option value="es-CL">Chile</option>
+      <option value="hr-HR">Croatia</option>
+      <option value="cs-CZ">Czechia</option>
+      <option value="da-DK">Danmark</option>
+      <option value="de-DE">Deutschland</option>
+      <option value="et-EE">Eesti</option>
+      <option value="es-ES">España</option>
+      <option value="fr-FR">France</option>
+      <option value="ko-KR">Hanguk</option>
+      <option value="en-HK">Hong Kong, China</option>
+      <option value="en-IS">Iceland</option>
+      <option value="en-IE">Ireland</option>
+      <option value="en-IL">Israel</option>
+      <option value="it-IT">Italia</option>
+      <option value="el-CY">Kypros</option>
+      <option value="lv-LV">Latvija</option>
+      <option value="lt-LT">Lietuva</option>
+      <option value="de-LU">Luxemburg</option>
+      <option value="hu-HU">Magyarország</option>
+      <option value="en-MY">Malaysia</option>
+      <option value="en-MT">Malta</option>
+      <option value="es-MX">México</option>
+      <option value="nl-NL">Nederland</option>
+      <option value="en-NZ">New Zealand</option>
+      <option value="ja-JP">Nihon</option>
+      <option value="no-NO">Norge</option>
+      <option value="pl-PL">Polska</option>
+      <option value="pt-PT">Portugual</option>
+      <option value="ro-RO">România</option>
+      <option value="de-CH">Schweiz</option>
+      <option value="en-SG">Singapore</option>
+      <option value="sl-SI">Slovenia</option>
+      <option value="sk-SK">Slovensko</option>
+      <option value="en-ZA">South Africa</option>
+      <option value="fi-FI">Suomi</option>
+      <option value="sv-SE">Sverige</option>
+      <option value="en-TH">Thailand</option>
+      <option value="tr-TR">Türkiye</option>
+      <option value="en-GB">UK</option>
+      <option value="en-US">USA</option>
+      <option value="en-AE">United Arab Emirates</option>
+      <option value="zh-CN">Zhōngguó, dàlù</option>
+      <option value="de-AT">Österreich</option>
+      <option value="el-GR">Ελλάδα</option>
+      <option value="ru-BY">Беларуси</option>
+      <option value="bg-BG">България</option>
+      <option value="ru-KZ">Казахстан</option>
+      <option value="ru-RU">Россия</option>
+      <option value="sr-RS">Србија</option>
+      <option value="uk-UA">Україна</option>
+      </select>
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('miele-config', {
+        category: 'config',
+        defaults: {
+          name: { value: "" },
+          clientId: { required: true },
+          clientSecret: { required: true },
+          username: { required: true },
+          password: { required: true },
+          country: { required: true },
+        },
+        label() {
+          return this.name;
+        },
+    });
+</script>

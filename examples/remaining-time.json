@@ -1,0 +1,78 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "000165033945",
+        "type": "miele-appliance",
+        "z": "f6f2187d.f17ca8",
+        "name": "Dishwasher",
+        "config": "b3492a03cd5873f4",
+        "x": 290,
+        "y": 360,
+        "wires": [
+            [
+                "b3adf119ac440a33"
+            ]
+        ]
+    },
+    {
+        "id": "000173192169",
+        "type": "miele-appliance",
+        "z": "f6f2187d.f17ca8",
+        "name": "Dryer",
+        "config": "b3492a03cd5873f4",
+        "x": 270,
+        "y": 280,
+        "wires": [
+            [
+                "b3adf119ac440a33"
+            ]
+        ]
+    },
+    {
+        "id": "000143690605",
+        "type": "miele-appliance",
+        "z": "f6f2187d.f17ca8",
+        "name": "Washer",
+        "config": "b3492a03cd5873f4",
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "b3adf119ac440a33"
+            ]
+        ]
+    },
+    {
+        "id": "b3adf119ac440a33",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Log time",
+        "func": "\nif (msg.payload.type !== \"device\" ) {\n    return;\n}\n// If status is not equal running\nif (msg.payload.data.state.status.value_raw != 5) {\n    return;\n}\n\nlet remaining = msg.payload.data.state.remainingTime;\nif (remaining.length != 2) {\n    return;\n}\n\nlet hours = remaining[0];\nlet minutes = remaining[1];\nif (hours == 0 && minutes == 0) {\n    return;\n}\n\nnode.warn(`${msg.payload.data.ident.type.value_localized}: ${hours}h ${minutes}m remaining`);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b3492a03cd5873f4",
+        "type": "miele-config",
+        "name": "Home",
+        "clientId": "3278d25b-XXXX-XXXX-XXXX-f9d438a68be4",
+        "clientSecret": "",
+        "username": "",
+        "password": "",
+        "country": "de-CH"
+    }
+]

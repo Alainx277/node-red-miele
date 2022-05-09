@@ -1,0 +1,10 @@
+{
+    "miele-config": {
+        "name": "Name",
+        "clientId": "Client Id",
+        "clientSecret": "Client Secret",
+        "username": "Username",
+        "password": "Password",
+        "country": "Country"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "miele-appliance": {
+        "name": "Name",
+        "config": "Config",
+        "id": "Id",
+        "unknown-error": "An error occured"
+    }
+}

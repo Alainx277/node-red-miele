@@ -1,0 +1,16 @@
+{
+  "name": "@alainx277/node-red-miele",
+  "version": "0.1.0",
+  "description": "Node red module for interfacing with Miele devices",
+  "author": "Alain Siegrist",
+  "license": "Apache 2.0",
+  "private": false,
+  "keywords": ["node-red", "miele", "miele@home"],
+  "node-red": {
+    "version": ">=2.0.0",
+    "nodes": {
+      "miele-appliance": "src/miele-appliance.js",
+      "miele-config": "src/miele-config.js"
+    }
+  }
+}
